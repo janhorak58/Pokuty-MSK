@@ -1,96 +1,68 @@
-import React, { useEffect, useState } from "react";
-import Loader from "components/Loader";
-import Message from "components/Message";
+import { listFines, listPlayers } from "actions/Actions";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { loginUser, registerUser, logoutUser } from "actions/userActions";
+import { Link } from "react-router-dom";
 
 function HomeScreen() {
   const dispatch = useDispatch();
 
-  const [name, setName] = useState("");
-  const [l_email, setL_email] = useState("");
-  const [r_email, setR_email] = useState("");
-  const [l_password, setL_password] = useState("");
-  const [r_password, setR_password] = useState("");
-
   const userLogin = useSelector((state) => state.userLogin);
   const { ul_error, userInfo, ul_loading } = userLogin;
 
-  const userRegister = useSelector((state) => state.userRegister);
-  const { ur_error, userCreated, ur_loading } = userRegister;
+  const playerList = useSelector((state) => state.playerList);
+  const { pl_error, Players, pl_loading } = playerList;
 
-  useEffect(() => {}, []);
+  const fineList = useSelector((state) => state.fineList);
+  const { fl_error, Fines, fl_loading } = fineList;
 
-  function registerUserHandler(e) {
-    e.preventDefault();
-    dispatch(registerUser(name, r_email, r_password));
-  }
+  useEffect(() => {
+    dispatch(listPlayers());
+    dispatch(listFines());
+  }, [dispatch]);
 
-  function loginUserHandler(e) {
-    e.preventDefault();
-    dispatch(loginUser(l_email, l_password));
-  }
+  function countFines(id) {
+    let suma = 0;
+    let myFines;
+    if (Fines) {
+      if (id === 0) {
+         myFines = Fines;
+      } else {
+         myFines = Fines.filter((f) => f.player === id);
+      }
+      myFines.map((mf) => (suma += mf.value));
+    }
 
-  function logoutUserHandler(e) {
-    e.preventDefault();
-    dispatch(logoutUser());
+    return suma;
   }
 
   return (
-    <div>
-      {userInfo ? (
-        <div>
-          {userCreated == userInfo.id && (
-            <Message message="Uživatel Byl úspěšně vytvořen" />
-          )}
-          <h2>Ahoj {userInfo.email}</h2>
-          <button onClick={logoutUserHandler}>Odhlásit se</button>
-        </div>
+    <div className="home-container">
+      <h1>Pokuty za celý tým: {countFines(0)} Kč</h1>
+      {ul_error || pl_error || fl_error ? (
+        <h2>Něco se nepovedlo</h2>
+      ) : ul_loading || pl_loading || fl_loading ? (
+        <h3>Načítání...</h3>
       ) : (
-        <div>
-          {ur_loading ? (
-            <Loader />
-          ) : ur_error ? (
-            <Message message={ur_error} />
-          ) : (
-            <form onSubmit={registerUserHandler}>
-              <div>
-                <label htmlFor="r_name">Jméno</label>
-                <input type="text" id="r_name" onChange={(e) => setName(e.target.value)} value={name}/>
-              </div>
-
-              <div>
-                <label htmlFor="r_email">Email</label>
-                <input type="email" id="r_email" onChange={(e) => setR_email(e.target.value)} value={r_email}/>
-              </div>
-
-              <div>
-                <label htmlFor="r_name">Heslo</label>
-                <input type="password" id="r_password" onChange={(e) =>setR_password(e.target.value)} value={r_password} />
-              </div>
-
-              <button type="submit">Registrovat se</button>
-            </form>
-          )}
-          {ul_loading ? (
-            <Loader />
-          ) : ul_error ? (
-            <Message message={ul_error} />
-          ) : (
-            <form onSubmit={loginUserHandler}>
-              <div>
-                <label htmlFor="l_email">Email</label>
-                <input type="email" id="l_email"  onChange={(e) =>setL_email(e.target.value)} value={l_email}/>
-              </div>
-              <div>
-                <label htmlFor="l_name">Heslo</label>
-                <input type="password" id="l_password"  onChange={(e) =>setL_password(e.target.value)} value={l_password}/>
-              </div>{" "}
-              <button type="submit">Přihlásit se</button>
-            </form>
-          )}
-        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Jméno</th>
+              <th>Pokuty Celkem</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Players &&
+              Players.length > 0 &&
+              Players.map((p) => (
+                <tr key={p.id}>
+                  <td>
+                    <Link to={`/jelito-cislo/${p.id}`}>{p.name}</Link>
+                  </td>
+                  <td>{countFines(p.id)} Kč</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       )}
     </div>
   );

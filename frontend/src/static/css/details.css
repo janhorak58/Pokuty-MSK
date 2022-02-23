@@ -1,0 +1,58 @@
+.details-container {
+    display: flex;
+    justify-content: center;
+    padding: 10vh 0;
+    background: var(--c-secondary);
+    min-height: 90vh;
+}
+
+.details-container a{
+    color: var(--c-primary);
+    text-decoration: none;
+    font-size: 1.4rem;
+}
+
+.details-container .details-content-container h1{
+    font-size: 4rem;
+    margin: 5vh 0;
+    
+}
+.details-container .details-content-container
+{
+    width: 80vw;
+}
+
+.details-container .details-content-container .fines-list-container {
+    margin: 5vh 0;
+}
+
+
+.details-container .details-content-container .fines-list-container ul li{
+    list-style: none;
+}
+    .details-container .details-content-container .fines-list-container ul li{
+    margin: 5vh 0;
+    background-color: var(--c-primary);
+    color: var(--c-secondary);
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem;
+    border-radius: 2px;
+    box-shadow: 2px 2px 8px 2px #28412f;
+    flex-wrap: wrap;
+    gap: 20px 0;
+
+    
+}
+
+.details-container .details-content-container .fines-list-container ul li * {
+    min-width: 50px;
+}
+
+.details-container .details-content-container .fines-list-container ul li a {
+    color: var(--c-warning);
+    text-decoration: none;
+}
+
+.details-container .details-content-container .fines-list-container ul li .pay {color: var(--c-success);}
+.details-container .details-content-container .fines-list-container ul li .cancel {color: var(--c-danger);}

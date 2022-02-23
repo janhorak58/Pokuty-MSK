@@ -3,6 +3,9 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 import HomeScreen from "./screens/HomeScreen";
+import LoginScreen from "./screens/LoginScreen";
+import DetailsScreen from "screens/DetailsScreen";
+import FineCreate from "screens/FineCreate";
 
 function App() {
   return (
@@ -11,9 +14,12 @@ function App() {
       <main id="main-content-container">
         <Routes>
           <Route path="/" element={<HomeScreen />} exact />
+          <Route path="/login" element={<LoginScreen />} exact />
+          <Route path="/pridat-pokutu" element={<FineCreate />} exact />
+          <Route path="/jelito-cislo/:id" element={<DetailsScreen />} exact />
         </Routes>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </HashRouter>
   );
 }

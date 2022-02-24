@@ -26,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '0(d+diyy_w_ly2$=93snrv9oq-3sv+l!6nzltv!k&jnii87+0#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'pokuty-msk-dorost.herokuapp.com', 'www.pokuty-msk-dorost.herokuapp.com']
 
 
 # Application definition

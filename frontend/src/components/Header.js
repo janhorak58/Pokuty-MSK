@@ -15,7 +15,7 @@ function Header() {
   return (
     <div className="header-container">
       <LinkContainer to="/">
-        <img src="../media/images/msk_logo.svg" alt="MSK Logo" />
+        <img src="/static/images/msk_logo.svg" alt="MSK Logo" />
       </LinkContainer>
       <h2>Pokuty MSK Dorost 2022</h2>
       {ul_error ? <p>Něco je špatně</p> : ul_loading ? <p>Načítání...</p> : userInfo && <Link to="/pridat-pokutu">Přidat Pokutu</Link>}

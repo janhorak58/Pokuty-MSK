@@ -35,8 +35,25 @@ function HomeScreen() {
     return suma;
   }
 
+  function countPaidFines(id) {
+    let suma = 0;
+    let myPlayers;
+    if (Players) {
+      if (id === 0) {
+         myPlayers = Players
+      } else {
+         myPlayers = Players.filter((p) => p.id === id);
+      }
+      myPlayers.map((p) => (suma += p.amount_paid));
+    }
+
+    return suma;
+  }
+
   return (
     <div className="home-container">
+      <h2 className="tc-warning">Vybráno: {countPaidFines(0)} Kč</h2>
+
       <h1>Pokuty za celý tým: {countFines(0)} Kč</h1>
       {ul_error || pl_error || fl_error ? (
         <h2>Něco se nepovedlo</h2>
@@ -47,7 +64,7 @@ function HomeScreen() {
           <thead>
             <tr>
               <th>Jméno</th>
-              <th>Pokuty Celkem</th>
+              <th>Placeno / Pokuty Celkem</th>
             </tr>
           </thead>
           <tbody>
@@ -56,9 +73,9 @@ function HomeScreen() {
               Players.map((p) => (
                 <tr key={p.id}>
                   <td>
-                    <Link to={`/jelito-cislo/${p.id}`}>{p.name}</Link>
+                    <Link to={`/hrac/${p.id}`}>{p.name}</Link>
                   </td>
-                  <td>{countFines(p.id)} Kč</td>
+                  <td>{countPaidFines(p.id)} / {countFines(p.id)} Kč</td>
                 </tr>
               ))}
           </tbody>

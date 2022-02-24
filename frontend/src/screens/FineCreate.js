@@ -9,7 +9,7 @@ function FineCreate() {
   const navigate = useNavigate()
 
   const [reason, setReason] = useState("");
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(50);
   const [playerId, setPlayerId] = useState(null);
 
   const userLogin = useSelector((state) => state.userLogin);

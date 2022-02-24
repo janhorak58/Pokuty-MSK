@@ -16,7 +16,7 @@ function App() {
           <Route path="/" element={<HomeScreen />} exact />
           <Route path="/login" element={<LoginScreen />} exact />
           <Route path="/pridat-pokutu" element={<FineCreate />} exact />
-          <Route path="/jelito-cislo/:id" element={<DetailsScreen />} exact />
+          <Route path="/hrac/:id" element={<DetailsScreen />} exact />
         </Routes>
       </main>
       {/* <Footer /> */}

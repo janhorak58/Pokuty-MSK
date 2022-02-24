@@ -56,3 +56,38 @@
 
 .details-container .details-content-container .fines-list-container ul li .pay {color: var(--c-success);}
 .details-container .details-content-container .fines-list-container ul li .cancel {color: var(--c-danger);}
+
+
+.payment-state-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.payment-state-container .pay-form {
+    height: 100%;
+    background: var(--c-primary);
+    padding: 1rem;
+    border-radius: 3px;
+    box-shadow: 2px 2px 8px 2px #28112f;
+
+
+}
+
+.payment-state-container .pay-form * {
+    padding: 1rem;
+    border: 0;
+}
+
+.payment-state-container .pay-form input {
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.payment-state-container .pay-form button {
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    background: var(--c-warning);
+    padding: 1rem 2rem;
+    cursor: pointer;
+}

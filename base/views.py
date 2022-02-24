@@ -101,6 +101,9 @@ def editplayer(request):
     if data["name"]:
         player.name=data["name"]
         
+    if data["amount_paid"]:
+        player.amount_paid += float(data["amount_paid"])
+        
     player.save()
       
     players = Player.objects.all()

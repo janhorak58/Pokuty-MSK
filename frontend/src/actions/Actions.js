@@ -187,7 +187,7 @@ export const createPlayer = (name) => async (dispatch, getState) => {
   }
 };
 
-export const updatePlayer = (id, name) => async (dispatch, getState) => {
+export const updatePlayer = (id, name, amount_paid) => async (dispatch, getState) => {
   try {
     dispatch({
       type: PLAYER_UPDATE_REQUEST,
@@ -206,7 +206,7 @@ export const updatePlayer = (id, name) => async (dispatch, getState) => {
 
     const { data } = await axios.post(
       "/api/player/edit/",
-      { id: id, name: name },
+      { id: id, name: name, amount_paid:amount_paid },
       config
     );
 
